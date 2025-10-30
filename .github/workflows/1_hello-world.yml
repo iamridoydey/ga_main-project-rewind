@@ -8,3 +8,9 @@ jobs:
       - name: Print Hello Prite
         run: |
             echo "Hello, Prite from github action"
+  
+  print-hello-world-by-python:
+    runs-on: ubuntu-24.04
+    steps:
+      - run: print("Hello, Prite from python")
+        shell: "python"
