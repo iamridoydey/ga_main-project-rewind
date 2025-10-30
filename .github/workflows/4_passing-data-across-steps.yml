@@ -11,7 +11,7 @@ jobs:
         id: generate-name
         run: |
             name="Prite dey"
-            echo "name=${name}" >> "$GITHUB_OUPTUT"
+            echo "name=${name}" >> "$GITHUB_OUTPUT"
             echo "NAME=${name}" >> "$GITHUB_ENV"
         
       - name: Varify the variables
