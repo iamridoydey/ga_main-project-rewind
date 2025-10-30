@@ -1,1 +1,1 @@
-# This is the document for event types in github action
+# This page hold the event types docs
