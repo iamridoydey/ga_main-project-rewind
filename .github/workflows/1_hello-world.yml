@@ -1,0 +1,10 @@
+name: Print Hello Prite
+on:
+  workflow_dispatch:
+jobs:
+  print-hello-world:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Print Hello Prite
+        run: |
+            echo "Hello, Prite from github action"
