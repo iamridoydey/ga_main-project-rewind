@@ -1,0 +1,22 @@
+name: Env Vars Project
+on:
+  workflow_dispatch:
+env:
+  WORKFLOW_VAR: workflow scope variable
+jobs:
+  job1:
+    runs-on: ubuntu-24.04
+    env:
+      JOB_VAR: job scope variable
+    steps:
+      - name: job 1 first step
+        env:
+          STEP_VAR: step scope variable
+        run: |
+            echo -e "$WORKFLOW_VAR\n\t$JOB_VAR\n\t$STEP_VAR"
+  job2:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Check accessibility of other varible
+        run: |
+            echo -e "$WORKFLOW_VAR\n\t$JOB_VAR\n\t$STEP_VAR"
