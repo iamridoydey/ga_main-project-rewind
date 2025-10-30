@@ -1,0 +1,30 @@
+name: Passing Data Across Step
+on:
+  workflow_dispatch:
+jobs:
+  producer:
+    runs-on: ubuntu-24.04
+    outputs:
+      name: ${{steps.generate-name.outputs.name}}
+    steps:
+      - name: producer steps
+        id: generate-name
+        run: |
+            name = Prite dey
+            echo "name=${name}" >> "$GITHUB_OUPTUT"
+            echo "NAME=${name}" >> "$GITHUB_ENV"
+        
+      - name: Varify the variables
+        run: |
+            echo "name (outputs): ${{steps.generate-name.outputs.name}}"
+            echo "NAME (environement): $NAME"
+    
+  consumer:
+    runs-on: ubuntu-24.04
+    outputs:
+      name: ${{steps.generate-name.outputs.name}}
+    steps:
+      - name: Varify the producer variables
+        run: |
+            echo "name (outputs): ${{steps.generate-name.outputs.name}}"
+            echo "NAME (environement): $NAME" | echo "NAME (environment): NAME<unset>"
