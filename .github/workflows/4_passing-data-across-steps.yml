@@ -10,7 +10,7 @@ jobs:
       - name: producer steps
         id: generate-name
         run: |
-            name = Prite dey
+            name="Prite dey"
             echo "name=${name}" >> "$GITHUB_OUPTUT"
             echo "NAME=${name}" >> "$GITHUB_ENV"
         
@@ -21,10 +21,10 @@ jobs:
     
   consumer:
     runs-on: ubuntu-24.04
-    outputs:
-      name: ${{steps.generate-name.outputs.name}}
+    needs:
+      - producer
     steps:
       - name: Varify the producer variables
         run: |
-            echo "name (outputs): ${{steps.generate-name.outputs.name}}"
+            echo "name (outputs): ${{needs.producer.outputs.name}}"
             echo "NAME (environement): $NAME" | echo "NAME (environment): NAME<unset>"
