@@ -1,0 +1,24 @@
+name: Event Types
+on:
+  push:
+    branches: 
+      - "fix/*"
+  pull_request:
+    types:
+      - opened
+      - synchronize
+      - reopened
+    paths:
+      - "2_event-types/*.md"
+      # Excluded
+      - "!2_event-types/*.txt"
+  workflow_dispatch:
+
+jobs:
+  print-event-types:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Dump full event
+        run: |
+            echo "=== $GITHUB_EVENT_NAME payload ===="
+            cat "$GITHUB_EVENT_PATH"
