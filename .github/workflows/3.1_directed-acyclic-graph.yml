@@ -1,4 +1,4 @@
-name: Directed Acyclic Graph
+name: Directed Acyclic Graph2
 on:
   workflow_dispatch:
 jobs:
