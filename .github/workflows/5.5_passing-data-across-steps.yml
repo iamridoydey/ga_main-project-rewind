@@ -17,7 +17,7 @@ jobs:
       - name: Producing of variable
         id: generate-vars
         run: |
-            name: producer
+            name=producer
             echo "name=${name}" >> "$GITHUB_OUTPUT"
             echo "NAME=${name}" >> "$GITHUB_ENV"
         
