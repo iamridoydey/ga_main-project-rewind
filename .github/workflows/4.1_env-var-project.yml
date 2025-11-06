@@ -4,7 +4,11 @@ on:
   push:
     branches:
       - "main"
-      - "fix/"
+      - "fix/*"
+  pull_request:
+    branches:
+      - "main"
+
 env:
   WORKFLOW_VAR: "This is workflow level variable"
 jobs:
@@ -17,11 +21,11 @@ jobs:
         env:
           STEPS_VAR: "This is steps level variable"
         run: |
-            echo -e "$WORKFLOW_VAR\n\t$JOB_VAR\n\t$STEPS_VAR\n
+            echo -e "$WORKFLOW_VAR\n\t$JOB_VAR\n\t$STEPS_VAR\n"
   
   job2:
     runs-on: ubuntu-24.04
     steps:
       - name: job2 block (Trying to access others job variable)
         run: |
-            echo -e "$WORKFLOW_VAR\n\t$JOB_VAR\n\t$STEPS_VAR\n
+            echo -e "$WORKFLOW_VAR\n\t$JOB_VAR\n\t$STEPS_VAR\n"
