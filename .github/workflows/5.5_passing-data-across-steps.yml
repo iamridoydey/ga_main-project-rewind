@@ -1,0 +1,36 @@
+name: Passing Data Across Steps2
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - "main"
+      - "fix/*"
+  pull_request:
+    branches:
+      - "main"
+jobs:
+  producer:
+    runs-on: ubuntu-24.04
+    outputs: 
+      name: ${{steps.generate-vars.outputs.name}}
+    steps:
+      - name: Producing of variable
+        id: generate-vars
+        run: |
+            name: producer
+            echo "name=${name}" >> "$GITHUB_OUTPUT"
+            echo "NAME=${name}" >> "$GITHUB_ENV"
+        
+      - name: Validate the outputs
+        run: |
+            echo "GITHUB_OUTPUT: ${{steps.generate-vars.outputs.name}}"
+            echo "GITHUB_ENV: $GITHUB_ENV"
+  
+  consumer:
+    runs-on: ubuntu-24.04
+    needs: producer
+    steps:
+      - name: Printing variable from producer
+        run: |
+            echo "GITHUB_OUTPUT (consumer): ${{needs.producer.outputs.name}}"
+            echo "GITHUB_ENV: $GITHUB_ENV" || echo "GITHUB_ENV: GITHUB_ENV<unknown>"
