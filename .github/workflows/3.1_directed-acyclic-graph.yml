@@ -1,0 +1,37 @@
+name: Directed Acyclic Graph
+on:
+  workflow_dispatch:
+jobs:
+  job1:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Print job1
+        run: |
+              echo "This is job1"
+    
+  job2:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Print job2
+        run: |
+            echo "This is from job2"
+
+  job3:
+    runs-on: ubuntu-24.04
+    needs:
+      - job1
+      - job2
+    steps:
+      - name: Print job3
+        run: |
+            echo "This is from job3"
+
+  job4:
+    runs-on: ubuntu-24.04
+    needs:
+      - job2
+      - job3
+    steps:
+      - name: Print job4
+        run: |
+            echo "This is from job4"
