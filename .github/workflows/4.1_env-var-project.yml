@@ -1,0 +1,27 @@
+name: Env var project2
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - "main"
+      - "fix/"
+env:
+  WORKFLOW_VAR: "This is workflow level variable"
+jobs:
+  job1:
+    runs-on: ubuntu-24.04
+    env:
+      JOB_VAR: "This is job level variable"
+    steps:
+      - name: job1 block
+        env:
+          STEPS_VAR: "This is steps level variable"
+        run: |
+            echo -e "$WORKFLOW_VAR\n\t$JOB_VAR\n\t$STEPS_VAR\n
+  
+  job2:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: job2 block (Trying to access others job variable)
+        run: |
+            echo -e "$WORKFLOW_VAR\n\t$JOB_VAR\n\t$STEPS_VAR\n
